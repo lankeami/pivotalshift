@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pivotal Shift — People, Leadership, AI Enablement</title>
+  <meta name="description" content="Pivotal Shift helps organizations navigate change and create momentum through people team expertise, leadership development, and AI enablement.">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #1B2D4F;
+      --navy-deep: #0F1B33;
+      --teal: #0891B2;
+      --teal-light: #22D3EE;
+      --teal-dark: #0E7490;
+      --slate: #64748B;
+      --slate-light: #94A3B8;
+      --bg: #F8FAFC;
+      --white: #FFFFFF;
+      --border: #E2E8F0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--navy);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+
+    nav.scrolled { box-shadow: 0 1px 12px rgba(0, 0, 0, 0.08); }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav-logo { height: 48px; }
+
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--slate);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--navy); }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white) !important;
+      padding: 0.6rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(8, 145, 178, 0.3);
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .mobile-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--navy);
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 6rem;
+      background: linear-gradient(180deg, var(--white) 0%, var(--bg) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -20%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(8, 145, 178, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -15%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(27, 45, 79, 0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content { max-width: 800px; position: relative; z-index: 1; }
+
+    .hero-logo {
+      width: 180px;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease-out;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease-out 0.1s backwards;
+    }
+
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal), var(--teal-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--slate);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      animation: fadeUp 0.8s ease-out 0.2s backwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s ease-out 0.3s backwards;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+      padding: 0.9rem 2.2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(8, 145, 178, 0.3);
+    }
+
+    .btn-secondary {
+      background: var(--white);
+      color: var(--navy);
+      padding: 0.9rem 2.2rem;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 2px solid var(--border);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--teal);
+      box-shadow: 0 4px 12px rgba(8, 145, 178, 0.1);
+    }
+
+    /* SECTIONS */
+    section { padding: 6rem 2rem; }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: var(--slate);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    /* SERVICES */
+    .services { background: var(--white); }
+
+    .services-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .services-header .section-subtitle { margin: 0 auto; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .service-card {
+      padding: 2.5rem;
+      border-radius: 16px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .service-icon.people {
+      background: linear-gradient(135deg, rgba(8, 145, 178, 0.12), rgba(34, 211, 238, 0.12));
+      color: var(--teal);
+    }
+
+    .service-icon.leadership {
+      background: linear-gradient(135deg, rgba(27, 45, 79, 0.12), rgba(27, 45, 79, 0.06));
+      color: var(--navy);
+    }
+
+    .service-icon.ai {
+      background: linear-gradient(135deg, rgba(14, 116, 144, 0.12), rgba(8, 145, 178, 0.12));
+      color: var(--teal-dark);
+    }
+
+    .service-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .service-card p {
+      color: var(--slate);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .service-list {
+      list-style: none;
+      margin-top: 1.25rem;
+    }
+
+    .service-list li {
+      padding: 0.4rem 0;
+      font-size: 0.9rem;
+      color: var(--slate);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .service-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+      margin-top: 0.5rem;
+    }
+
+    /* ABOUT */
+    .about {
+      background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+      color: var(--white);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about .section-label { color: var(--teal-light); }
+
+    .about .section-subtitle {
+      color: var(--slate-light);
+      max-width: none;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .stat-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--teal-light), var(--teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--slate-light);
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+
+    /* APPROACH */
+    .approach { background: var(--white); }
+
+    .approach-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .approach-header .section-subtitle { margin: 0 auto; }
+
+    .approach-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      position: relative;
+    }
+
+    .approach-steps::before {
+      content: '';
+      position: absolute;
+      top: 40px;
+      left: 15%;
+      right: 15%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--teal-light), var(--teal));
+      opacity: 0.3;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+    }
+
+    .step-number {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0 auto 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .step p {
+      font-size: 0.9rem;
+      color: var(--slate);
+      line-height: 1.7;
+      max-width: 280px;
+      margin: 0 auto;
+    }
+
+    /* CTA */
+    .cta {
+      background: var(--bg);
+      text-align: center;
+    }
+
+    .cta-card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+      border-radius: 24px;
+      padding: 4rem 3rem;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -30%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(8, 145, 178, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-card .section-title {
+      color: var(--white);
+      position: relative;
+    }
+
+    .cta-card p {
+      color: var(--slate-light);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .cta-card .btn-primary {
+      background: linear-gradient(135deg, var(--teal), var(--teal-light));
+      position: relative;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy-deep);
+      color: var(--slate-light);
+      padding: 3rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo { height: 36px; filter: brightness(0) invert(1); opacity: 0.8; }
+
+    .footer-text { font-size: 0.85rem; }
+
+    .footer-links { display: flex; gap: 1.5rem; }
+
+    .footer-links a {
+      color: var(--slate-light);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--teal-light); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-toggle { display: block; }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 72px;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      }
+
+      .hero { padding: 7rem 1.5rem 4rem; min-height: auto; }
+      .hero-logo { width: 140px; }
+
+      .services-grid,
+      .approach-steps { grid-template-columns: 1fr; }
+
+      .approach-steps::before { display: none; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+
+      .cta-card { padding: 3rem 1.5rem; }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <img src="assets/logo.png" alt="Pivotal Shift" class="nav-logo">
+    <div class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#approach">Approach</a>
+      <a href="#contact" class="nav-cta">Get in Touch</a>
+    </div>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <img src="assets/logo.png" alt="Pivotal Shift" class="hero-logo">
+    <h1>Navigating Change.<br><span class="gradient-text">Creating Momentum.</span></h1>
+    <p>We partner with growing organizations to build resilient people strategies, develop confident leaders, and unlock the power of AI across your teams.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start a Conversation &#8594;</a>
+      <a href="#services" class="btn-secondary">Explore Our Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="services-header">
+      <span class="section-label">What We Do</span>
+      <h2 class="section-title">Expertise That Drives Transformation</h2>
+      <p class="section-subtitle">Three interconnected practices designed to meet organizations wherever they are in their growth journey.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <div class="service-icon people">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>People Team Expertise</h3>
+        <p>Build the HR foundations and culture that let your team do their best work, without the overhead of a full-time executive hire.</p>
+        <ul class="service-list">
+          <li>Fractional People/HR leadership</li>
+          <li>Talent strategy &amp; workforce planning</li>
+          <li>Culture building &amp; employee engagement</li>
+          <li>Compensation &amp; benefits design</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon leadership">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3>Leadership Development</h3>
+        <p>Equip your leaders with the skills and confidence to navigate complexity, inspire teams, and drive results.</p>
+        <ul class="service-list">
+          <li>Executive &amp; emerging leader coaching</li>
+          <li>Management training programs</li>
+          <li>Team effectiveness workshops</li>
+          <li>Organizational change leadership</li>
+        </ul>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon ai">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v3"/><path d="M15 1v3"/><path d="M9 20v3"/><path d="M15 20v3"/><path d="M20 9h3"/><path d="M20 14h3"/><path d="M1 9h3"/><path d="M1 14h3"/></svg>
+        </div>
+        <h3>AI Enablement</h3>
+        <p>Move beyond the hype. We help teams adopt AI tools practically, responsibly, and in ways that actually save time.</p>
+        <ul class="service-list">
+          <li>AI readiness assessments</li>
+          <li>Hands-on team training &amp; workshops</li>
+          <li>Workflow automation strategy</li>
+          <li>Responsible AI policy development</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <span class="section-label">Why Pivotal Shift</span>
+        <h2 class="section-title">Built for the Moments That Matter Most</h2>
+        <p class="section-subtitle">Growth inflection points demand more than generic advice. We bring hands-on experience from building and scaling people functions, leading organizational transformations, and implementing AI where it actually makes a difference.<br><br>Whether you're a 20-person startup hiring your first managers or a 500-person company rethinking how your teams work with AI, we meet you where you are.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-number">People</div>
+          <div class="stat-label">Strategy &amp; Operations</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">Leaders</div>
+          <div class="stat-label">Coaching &amp; Development</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">AI</div>
+          <div class="stat-label">Practical Enablement</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">Growth</div>
+          <div class="stat-label">At Every Stage</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPROACH -->
+<section class="approach" id="approach">
+  <div class="section-inner">
+    <div class="approach-header">
+      <span class="section-label">Our Approach</span>
+      <h2 class="section-title">Simple Process, Lasting Impact</h2>
+      <p class="section-subtitle">Every engagement starts with understanding where you are and where you want to go.</p>
+    </div>
+    <div class="approach-steps">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Discover</h3>
+        <p>We listen first. Deep-dive conversations to understand your organization, culture, and the specific challenges you're facing.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Design</h3>
+        <p>Tailored strategies and action plans grounded in what works, not one-size-fits-all frameworks.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Deliver</h3>
+        <p>Hands-on execution alongside your team, building capability so the results stick long after we're done.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="section-inner">
+    <div class="cta-card">
+      <span class="section-label">Let's Talk</span>
+      <h2 class="section-title">Ready to Make Your Next Shift?</h2>
+      <p>Whether you have a specific challenge or just want to explore what's possible, we'd love to hear from you.</p>
+      <a href="mailto:hello@pivotalshift.com" class="btn-primary">hello@pivotalshift.com &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <img src="assets/logo.png" alt="Pivotal Shift" class="footer-logo">
+    <p class="footer-text">&copy; 2025 Pivotal Shift. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  const toggle = document.getElementById('mobileToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    links.classList.toggle('open');
+  });
+
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => links.classList.remove('open'));
+  });
+</script>
+
+</body>
+</html>
