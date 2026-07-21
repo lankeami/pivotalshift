@@ -141,17 +141,33 @@
       pointer-events: none;
     }
 
-    .hero-content { max-width: 800px; position: relative; z-index: 1; }
+    .hero-content {
+      max-width: 1200px;
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-left {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     .hero-logo {
-      width: 180px;
-      margin-bottom: 2rem;
+      width: 100%;
+      max-width: 500px;
       animation: fadeUp 0.8s ease-out;
     }
 
+    .hero-right { text-align: left; }
+
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
       font-weight: 700;
       line-height: 1.15;
       margin-bottom: 1.5rem;
@@ -166,10 +182,10 @@
     }
 
     .hero p {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--slate);
-      max-width: 600px;
-      margin: 0 auto 2.5rem;
+      max-width: 500px;
+      margin-bottom: 2.5rem;
       line-height: 1.7;
       animation: fadeUp 0.8s ease-out 0.2s backwards;
     }
@@ -570,7 +586,10 @@
       }
 
       .hero { padding: 7rem 1.5rem 4rem; min-height: auto; }
-      .hero-logo { width: 140px; }
+      .hero-content { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      .hero-right { text-align: center; }
+      .hero-logo { max-width: 280px; }
+      .hero-actions { justify-content: center; }
 
       .services-grid,
       .approach-steps { grid-template-columns: 1fr; }
@@ -609,12 +628,16 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-content">
-    <img src="assets/logo.png" alt="Pivotal Shift" class="hero-logo">
-    <h1>Navigating Change.<br><span class="gradient-text">Creating Momentum.</span></h1>
-    <p>We partner with growing organizations to build resilient people strategies, develop confident leaders, and unlock the power of AI across your teams.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">Start a Conversation &#8594;</a>
-      <a href="#services" class="btn-secondary">Explore Our Services</a>
+    <div class="hero-left">
+      <img src="assets/logo.png" alt="Pivotal Shift" class="hero-logo">
+    </div>
+    <div class="hero-right">
+      <h1>Navigating Change.<br><span class="gradient-text">Creating Momentum.</span></h1>
+      <p>We partner with growing organizations to build resilient people strategies, develop confident leaders, and unlock the power of AI across your teams.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Start a Conversation &#8594;</a>
+        <a href="#services" class="btn-secondary">Explore Our Services</a>
+      </div>
     </div>
   </div>
 </section>
